@@ -1,0 +1,50 @@
+{% extends 'biblioteca/base.html' %}
+
+{% block title %}Editoriales - LibMgmtSys{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="bi bi-building"></i> Editoriales</h1>
+    <a href="{% url 'biblioteca:editorial-create' %}" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Nueva Editorial
+    </a>
+</div>
+
+{% if editoriales %}
+    <div class="row">
+        {% for editorial in editoriales %}
+        <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ editorial.nombre }}</h5>
+                    <p class="card-text">
+                        <strong>Ubicación:</strong> {{ editorial.ciudad }}, {{ editorial.estado }}, {{ editorial.pais }}<br>
+                        {% if editorial.website %}
+                            <strong>Sitio web:</strong> <a href="{{ editorial.website }}" target="_blank">{{ editorial.website }}</a>
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group w-100" role="group">
+                        <a href="{% url 'biblioteca:editorial-detail' editorial.pk %}" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-eye"></i> Ver
+                        </a>
+                        <a href="{% url 'biblioteca:editorial-update' editorial.pk %}" class="btn btn-outline-warning btn-sm">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <a href="{% url 'biblioteca:editorial-delete' editorial.pk %}" class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        <i class="bi bi-info-circle"></i> No hay editoriales registradas aún.
+        <a href="{% url 'biblioteca:editorial-create' %}" class="alert-link">Crear la primera editorial</a>
+    </div>
+{% endif %}
+{% endblock %}
