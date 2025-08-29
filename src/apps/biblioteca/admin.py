@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Editorial, Autor, Libro
+from .models import Editorial, Autor, Libro, DescripcionTemplate
 
 
 @admin.register(Editorial)
@@ -26,3 +26,25 @@ class LibroAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('titulo',)}
     filter_horizontal = ['autores']
     date_hierarchy = 'fecha_publicacion'
+
+
+@admin.register(DescripcionTemplate)
+class DescripcionTemplateAdmin(admin.ModelAdmin):
+    list_display = ['nombre', 'activo', 'fecha_creacion', 'fecha_modificacion']
+    list_filter = ['activo', 'fecha_creacion']
+    search_fields = ['nombre', 'descripcion']
+    readonly_fields = ['fecha_creacion', 'fecha_modificacion']
+    
+    fieldsets = (
+        (None, {
+            'fields': ('nombre', 'descripcion', 'activo')
+        }),
+        ('Contenido HTML', {
+            'fields': ('contenido',),
+            'classes': ('wide',)
+        }),
+        ('Fechas', {
+            'fields': ('fecha_creacion', 'fecha_modificacion'),
+            'classes': ('collapse',)
+        }),
+    )

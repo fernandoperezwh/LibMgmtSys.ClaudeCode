@@ -1,6 +1,8 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
-from .models import Editorial, Autor, Libro
+from django.http import JsonResponse
+from django.views import View
+from .models import Editorial, Autor, Libro, DescripcionTemplate
 
 
 # Vistas para Editorial
@@ -100,3 +102,14 @@ class LibroDeleteView(DeleteView):
 class LibroDetailView(DetailView):
     model = Libro
     template_name = 'biblioteca/libro_detail.html'
+
+
+# Vista API para Templates
+class TemplatesAPIView(View):
+    def get(self, request, *args, **kwargs):
+        templates = DescripcionTemplate.objects.filter(activo=True).values(
+            'id', 'nombre', 'contenido', 'descripcion'
+        )
+        return JsonResponse({
+            'templates': list(templates)
+        })

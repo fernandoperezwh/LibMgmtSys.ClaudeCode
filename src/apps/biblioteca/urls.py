@@ -24,4 +24,7 @@ urlpatterns = [
     path('libros/<int:pk>/', views.LibroDetailView.as_view(), name='libro-detail'),
     path('libros/<int:pk>/editar/', views.LibroUpdateView.as_view(), name='libro-update'),
     path('libros/<int:pk>/eliminar/', views.LibroDeleteView.as_view(), name='libro-delete'),
+    
+    # API para Templates
+    path('api/templates/', views.TemplatesAPIView.as_view(), name='templates-api'),
 ]

@@ -139,6 +139,23 @@ CKEDITOR_CONFIGS = {
         ],
         'height': 300,
         'width': '100%',
+    },
+    'libro_templates': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['CustomTemplates'],
+            ['RemoveFormat', 'Source']
+        ],
+        'height': 300,
+        'width': '100%',
+        'removePlugins': 'templates',
+        'extraPlugins': 'customtemplates',
+        'customConfig': '/static/js/ckeditor-config.js',
+        'allowedContent': True,
+        'extraAllowedContent': 'input[type,checked,value,name,id,class,style]; p(*); div(*); h1(*); h2(*); h3(*); h4(*); h5(*); h6(*); ol(*); li(*); strong(*); br(*);'
     }
 }
 
